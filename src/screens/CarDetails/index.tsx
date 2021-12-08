@@ -25,7 +25,9 @@ import {
   Price,
   About,
   Accessories,
+  Footer
 } from './styles'
+import { Button } from '../../components/Button';
 
 export function CarDetails() {
   return (
@@ -63,6 +65,11 @@ export function CarDetails() {
           este e um automavel desportivo, surgiu do ledario toure de lide indualtad
         </About>
       </Content>
+      
+      <Footer>
+        <Button title="Confirmar"  />
+      </Footer>
+
     </Container>
   )
 }
