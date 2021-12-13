@@ -12,11 +12,20 @@ import {
   Footer,
 } from './styles'
 import { ConfirmButton } from '../../components/ConfirmButton';
+import { useNavigation } from '@react-navigation/native';
 
 
 export function RentComplete() {
 
   const { width } = useWindowDimensions();
+
+  
+  const navigation = useNavigation();
+
+  function handleConfirmationButton() {
+    navigation.navigate("Home")
+  }
+
 
   return (
     <Container>
@@ -40,7 +49,7 @@ export function RentComplete() {
       </Content>
 
       <Footer>
-        <ConfirmButton title="ok" />
+        <ConfirmButton title="ok" onPress={handleConfirmationButton}/>
       </Footer>
     </Container>
   )

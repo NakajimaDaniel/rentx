@@ -14,12 +14,9 @@ import {
   Inter_500Medium
 } from '@expo-google-fonts/inter';
 
-import { Home }  from './src/screens/Home';
 import theme from './src/styles/theme';
-import { CarDetails } from './src/screens/CarDetails';
-import { Scheduling } from './src/screens/Scheduling';
-import { RentDetails } from './src/screens/RentDetails';
-import { RentComplete } from './src/screens/RentComplete';
+
+import { Routes } from './src/routes';
 
 
 export default function App() {
@@ -38,7 +35,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RentComplete />
+      <Routes />
     </ThemeProvider>
 
   );
