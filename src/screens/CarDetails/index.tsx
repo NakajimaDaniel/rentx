@@ -4,12 +4,7 @@ import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
-import SpeedSvg from '../../assets/speed.svg';
-import AccelerationSvg from '../../assets/acceleration.svg';
-import ForceSvg from '../../assets/force.svg';
-import GasolineSvg from '../../assets/gasoline.svg';
-import ExchangeSvg from '../../assets/exchange.svg';
-import PeopleSvg from '../../assets/people.svg';
+
 import { Button } from '../../components/Button';
 
 
@@ -30,6 +25,7 @@ import {
   Footer
 } from './styles'
 import { CarDTO } from '../../dtos/CarDTO';
+import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 interface Params {
   car: CarDTO;
@@ -74,7 +70,7 @@ export function CarDetails() {
         <Accessories>
           {
             car.accessories.map(accessories => (
-              <Accessory key={accessories.type}  name={accessories.name} icon={SpeedSvg} />
+              <Accessory key={accessories.type}  name={accessories.name} icon={getAccessoryIcon(accessories.type)} />
             ))
           }
 
