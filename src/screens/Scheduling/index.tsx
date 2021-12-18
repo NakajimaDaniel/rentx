@@ -30,6 +30,10 @@ export function Scheduling() {
     navigation.navigate("RentDetails")
   }
 
+  function handleBack() {
+    navigation.goBack();
+  }
+
   return (
     <Container>
 
@@ -43,7 +47,7 @@ export function Scheduling() {
       <Header>
         <BackButton 
           color={theme.colors.shape}
-          onPress={() =>{}}
+          onPress={handleBack}
         />
         <Title>
           Escolha uma {'\n'}
