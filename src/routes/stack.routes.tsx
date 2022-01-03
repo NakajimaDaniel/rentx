@@ -23,8 +23,11 @@ export function StackRoutes() {
       <Screen 
         name="Home"
         component={Home}
+        options={{
+          gestureEnabled: false,
+        }}
       />
-      <Screen 
+      <Screen  
         name="CarDetails"
         component={CarDetails}
       />
