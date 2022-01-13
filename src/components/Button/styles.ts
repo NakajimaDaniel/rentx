@@ -1,8 +1,7 @@
 import { RectButton, RectButtonProps } from 'react-native-gesture-handler'
 import { RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
-
-interface ButtonProps extends RectButtonProps {
+interface ButtonProps {
   color: string;
 }
 
@@ -10,7 +9,6 @@ interface ButtonTitleProps {
   light: boolean;
 
 }
-
 
 export const Container = styled(RectButton)<ButtonProps> `
   width: 100%;
