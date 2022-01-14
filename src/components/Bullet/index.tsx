@@ -5,11 +5,11 @@ import {
 } from './styles'
 
 interface BulletProps {
-  active: boolean;
+  active?: boolean;
 }
 
 
-export function Bullet({ active }: BulletProps) {
+export function Bullet({ active=false }: BulletProps) {
   return (
     <Container  active={active} />
   )
