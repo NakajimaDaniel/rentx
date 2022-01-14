@@ -10,6 +10,7 @@ import { RentComplete } from '../../src/screens/RentComplete';
 import { MyCars } from '../screens/MyCars';
 import { Splash } from '../screens/Splash';
 import { SignIn } from '../screens/SignIn';
+import { FirstStep } from '../screens/SignUp/FirstStep';
 
 const { Navigator, Screen } = createNativeStackNavigator ();
 
@@ -20,6 +21,10 @@ export function StackRoutes() {
       <Screen 
         name="SignIn"
         component={SignIn}
+      />
+      <Screen 
+        name="SignUpFirstStep"
+        component={FirstStep}
       />
       <Screen 
         name="Home"
