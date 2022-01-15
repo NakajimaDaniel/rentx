@@ -58,10 +58,12 @@ export function FirstStep() {
           <Input 
             iconName="mail"
             placeholder="Email"
+            keyboardType='email-address'
           />
           <Input 
             iconName="credit-card"
             placeholder="CNH"
+            keyboardType="numeric"
           />
         </Form>
 
