@@ -12,18 +12,25 @@ import {
   Footer,
 } from './styles'
 import { ConfirmButton } from '../../components/ConfirmButton';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 
-export function RentComplete() {
+interface Params {
+  title: string;
+  message: string;
+  nextScreenRoute: string;
+}
+
+export function Confirmation() {
 
   const { width } = useWindowDimensions();
-
-  
+  const route = useRoute();
   const navigation = useNavigation();
 
+  const { title, message, nextScreenRoute } = route.params as Params;
+
   function handleConfirmationButton() {
-    navigation.navigate("Home")
+    navigation.navigate(nextScreenRoute)
   }
 
 
@@ -38,12 +45,10 @@ export function RentComplete() {
 
       <Content>
         <DoneSvg width={80} height={80} />
-        <Title>Carro Alugado!</Title>
+        <Title>{title}</Title>
 
         <Message>
-          Agora você só precisa ir {'\n'}
-          até uma concessionária da RENTX {'\n'}
-          pagar o seu automóvel
+          {message}
         </Message>
 
       </Content>

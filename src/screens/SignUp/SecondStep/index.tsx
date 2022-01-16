@@ -52,6 +52,12 @@ export function SecondStep() {
       return Alert.alert("As senhas não são iguais");
     }
 
+    navigation.navigate('Confirmation', {
+      nextScreenRoute: "SignIn",
+      title: "Conta Criada!",
+      message: `Agora é so fazer login\ne aproveitar`
+    })
+
   }
 
   return (
