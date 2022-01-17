@@ -9,6 +9,7 @@ import { PasswordInput } from '../../components/PasswordInput';
 
 import { Container, Header, SubTitle, Title, Footer, Form } from './styles'
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../hooks/auth';
 
 export function SignIn() {
 
@@ -16,7 +17,8 @@ export function SignIn() {
   const [password, setPassword] = useState('');
   const theme = useTheme();
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+  const { signIn } = useAuth();
 
   function handleNewAccount() {
     navigation.navigate("SignUpFirstStep")
@@ -29,7 +31,10 @@ export function SignIn() {
         password: Yup.string().required("Senha obrigatória"),
   
       })
-      await schema.validate({email, password })
+      await schema.validate({email, password });
+
+      signIn({ email, password });
+
     } catch(e) {
       if(e instanceof Yup.ValidationError) {
         return Alert.alert(e.message)
