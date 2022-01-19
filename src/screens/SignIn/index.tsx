@@ -82,7 +82,7 @@ export function SignIn() {
             <Button 
               title="login"
               onPress={handleSignIn}
-              enabled={false}
+              enabled={true}
               loading={false}
             />
 
