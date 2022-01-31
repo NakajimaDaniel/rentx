@@ -5,7 +5,7 @@ import { KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, Alert} from '
 import { useTheme } from 'styled-components'
 import { BackButton } from '../../components/BackButton'
 import { Feather } from '@expo/vector-icons'
-
+import * as ImagePicker from 'expo-image-picker';
 
 import { 
   Container,
@@ -28,10 +28,13 @@ import { useAuth } from '../../hooks/auth';
 
 
 export function Profile() {
+  
+  const {user} = useAuth();
 
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
-
-  const {user} = useAuth();
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [name, setName] = useState(user.name);
+  const [driverLicense, setDriverLicense] = useState(user.driver_license);
 
   const theme = useTheme();
   const navigation = useNavigation();
@@ -48,6 +51,25 @@ export function Profile() {
     setOption(optionSelected);
   }
 
+  async function handleSelectAvatar() {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaType: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect:[4,4],
+      quality: 1,
+    });
+
+
+    if(result.cancelled) {
+      return;
+    }
+
+    if(!result.cancelled) {
+      setAvatar(result.uri)
+    }
+
+  }
+
   return (
     <KeyboardAvoidingView behavior="position"  enabled >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
@@ -62,8 +84,8 @@ export function Profile() {
             </HeaderTop>
 
             <PhotoContainer>
-              <Photo  source={{uri: 'https://avatars.githubusercontent.com/u/59265044?v=4'}} />
-              <PhotoButton  onPress={() => {}} >
+              {!!avatar && <Photo  source={{uri: avatar}} />}
+              <PhotoButton  onPress={handleSelectAvatar} >
                 <Feather name="camera" size={24}  colors={theme.colors.shape} />
               </PhotoButton> 
             </PhotoContainer>
@@ -89,6 +111,7 @@ export function Profile() {
                   placeholder="Nome"
                   autoCorrect={false}
                   defaultValue={user.name}
+                  onChangeText={setName}
                 />
                 <Input 
                   iconName="mail"
@@ -101,6 +124,7 @@ export function Profile() {
                   placeholder="CNH"
                   keyboardType="numeric"
                   defaultValue={user.driver_license}
+                  onChangeText={setDriverLicense}
                 />
               </Section> :
 
