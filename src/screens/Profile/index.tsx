@@ -6,6 +6,8 @@ import { useTheme } from 'styled-components'
 import { BackButton } from '../../components/BackButton'
 import { Feather } from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker';
+import * as Yup from 'yup'
+
 
 import { 
   Container,
@@ -25,11 +27,12 @@ import {
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 import { useAuth } from '../../hooks/auth';
+import { Button } from '../../components/Button';
 
 
 export function Profile() {
   
-  const {user, signOut} = useAuth();
+  const {user, signOut, updateUser} = useAuth();
 
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
   const [avatar, setAvatar] = useState(user.avatar);
@@ -64,6 +67,37 @@ export function Profile() {
       setAvatar(result.uri)
     }
 
+  }
+
+  async function handleProfileUpdate() {
+    try {
+      const schema = Yup.object().shape({
+        driverLicense: Yup.string().required("CNH é obrigatória"),
+        name: Yup.string().required("Nome é obrigatorio")
+      })
+
+      const data = {name, driverLicense};
+
+      await schema.validate(data);
+
+      await updateUser({
+        id: user.id,
+        user_id: user.user_id,
+        email: user.email,
+        name,
+        driver_license: driverLicense,
+        avatar,
+        token: user.token
+      })
+
+      Alert.alert("Perfil atualizado")
+
+    } catch(error) {
+      if(error instanceof Yup.ValidationError) {
+        Alert.alert(error.message)
+      }
+      Alert.alert("Não foi possivel atualizar o perfil")
+    }
   }
 
   return (
@@ -142,6 +176,8 @@ export function Profile() {
                 />
               </Section>
             }
+
+            <Button  title="salvar alterações"  onPress={handleProfileUpdate} />
           </Content>
         </Container>
       </TouchableWithoutFeedback>
