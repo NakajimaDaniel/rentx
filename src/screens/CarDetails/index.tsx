@@ -28,6 +28,7 @@ import { CarDTO } from '../../dtos/CarDTO';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { useTheme } from 'styled-components';
+import { Car as ModelCar } from '../../database/model/car';
 
 
 interface Params {
