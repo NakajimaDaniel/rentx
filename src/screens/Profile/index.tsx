@@ -28,10 +28,12 @@ import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 import { useAuth } from '../../hooks/auth';
 import { Button } from '../../components/Button';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 
 export function Profile() {
   
+  const netInfo = useNetInfo();
   const {user, signOut, updateUser} = useAuth();
 
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
@@ -47,7 +49,12 @@ export function Profile() {
   }
 
   function handleOptionChange(optionSelected: 'dataEdit' | 'passwordEdit') {
-    setOption(optionSelected);
+    if(netInfo.isConnected === false && optionSelected === 'passwordEdit') {
+      Alert.alert("Para mudar a senha, conectar-se a internet.")
+    } else {
+      setOption(optionSelected);
+    }
+   
   }
 
   async function handleSelectAvatar() {
