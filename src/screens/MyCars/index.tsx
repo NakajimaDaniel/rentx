@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { Alert, FlatList } from 'react-native';
@@ -41,6 +41,7 @@ export function MyCars() {
   const [ cars, setCars] = useState<DataProps[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const screenIsFocus = useIsFocused();
   const navigation = useNavigation();
   const theme = useTheme();
 
@@ -72,7 +73,7 @@ export function MyCars() {
     }
 
     fetchCars();
-  }, [])
+  }, [screenIsFocus])
 
   return (
     <Container>
