@@ -28,15 +28,6 @@ import { Load } from '../../components/Load';
 import { format } from 'date-fns';
 import { parseISO } from 'date-fns/esm';
 
-interface CarProps {
-  id: string;
-  user_id: string;
-  car: CarDTO;
-  startDate: string;
-  endDate: string;
-
-}
-
 
 interface DataProps {
   id: string;
@@ -64,6 +55,7 @@ export function MyCars() {
         const response = await api.get('/rentals');
         const dataFormatted = response.data.map((data: DataProps) => {
           return {
+            id: data.id,
             car: data.car,
             start_date: format(parseISO(data.start_date), 'dd/MM/yyyy'),
             end_date: format(parseISO(data.end_date), 'dd/MM/yyyy'),
